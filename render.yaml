@@ -1,17 +1,21 @@
-services:
-  - type: worker
-    name: render-subnet-router
-    env: docker
-    autoDeploy: false
-    envVars:
-      - key: TAILSCALE_AUTHKEY
-        sync: false
-      - key: TAILSCALE_VERSION
-        value: 1.96.2
-      - key: ADVERTISE_ROUTES
-        value: 10.0.0.0/8
-    disk:
-      name: tailscale-state
-      mountPath: /var/lib/tailscale
-      sizeGB: 1
-
+projects:
+    - name: zeusgamble
+      environments:
+        - name: Production
+          services:
+            - type: worker
+              name: render-subnet-router
+              region: frankfurt
+              env: docker
+              autoDeploy: false
+              envVars:
+                - key: TAILSCALE_AUTHKEY
+                  sync: false
+                - key: TAILSCALE_VERSION
+                  value: 1.96.2
+                - key: ADVERTISE_ROUTES
+                  value: 10.0.0.0/8
+              disk:
+                name: tailscale-state
+                mountPath: /var/lib/tailscale
+                sizeGB: 1
